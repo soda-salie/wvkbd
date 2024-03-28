@@ -22,11 +22,39 @@ struct clr_scheme schemes[] = {
   .swipe = {.bgra = {100, 255, 100, 64}},
   .text = {.color = UINT32_MAX},
   .font = DEFAULT_FONT,
+},
+{
+  /* colors */
+  .bg = {.bgra = {15, 15, 15, transparency}},
+  .fg = {.bgra = {80, 80, 220, transparency}},
+  .high = {.bgra = {100, 100, 100, transparency}},
+  .swipe = {.bgra = {100, 255, 100, 64}},
+  .text = {.color = UINT32_MAX},
+  .font = DEFAULT_FONT,
+},
+{
+  /* colors */
+  .bg = {.bgra = {15, 15, 15, transparency}},
+  .fg = {.bgra = {125, 220, 125, transparency}},
+  .high = {.bgra = {100, 100, 100, transparency}},
+  .swipe = {.bgra = {100, 255, 100, 64}},
+  .text = {.color = UINT32_MAX},
+  .font = DEFAULT_FONT,
+},
+{
+  /* colors */
+  .bg = {.bgra = {15, 15, 15, transparency}},
+  .fg = {.bgra = {100, 100, 100, transparency}},
+  .high = {.bgra = {100, 100, 100, transparency}},
+  .swipe = {.bgra = {100, 255, 100, 64}},
+  .text = {.color = UINT32_MAX},
+  .font = DEFAULT_FONT,
 }
 };
 
 /* layers is an ordered list of layouts, used to cycle through */
 static enum layout_id layers[] = {
+  Tablet,
   Full, // First layout is the default layout on startup
   Special, 
   NumLayouts // signals the last item, may not be omitted
