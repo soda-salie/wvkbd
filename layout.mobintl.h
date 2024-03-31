@@ -68,6 +68,7 @@ enum layout_id {
     ComposeCyrK,
     Index,
     Tablet,
+    TabletReverse,
     NumLayouts,
 };
 
@@ -85,7 +86,7 @@ static struct key keys_full[], keys_full_wide[], keys_special[],
     keys_compose_cyr_i[], keys_compose_cyr_j[], keys_compose_cyr_e[],
     keys_compose_cyr_u[], keys_compose_cyr_l[], keys_compose_cyr_n[],
     keys_compose_cyr_tse[], keys_compose_cyr_che[], keys_compose_cyr_g[],
-    keys_compose_cyr_k[], keys_dialer[], keys_index[], keys_tablet[];
+    keys_compose_cyr_k[], keys_dialer[], keys_index[], keys_tablet[], keys_tablet_reverse[];
 
 static struct layout layouts[NumLayouts] = {
     [Full] = {keys_full, "latin", "full",
@@ -150,6 +151,7 @@ static struct layout layouts[NumLayouts] = {
 
     [Index] = {keys_index, "latin", "index", false},
     [Tablet] = {keys_tablet, "latin", "tablet", true},
+    [TabletReverse] = {keys_tablet_reverse, "latin", "tabletreverse", true},
 };
 
 /* key layouts
@@ -180,29 +182,304 @@ static struct layout layouts[NumLayouts] = {
  *
  * - layout: layout to switch to when key is pressed
  */
-static struct key keys_tablet[] = {
 
+
+static struct key keys_tablet_reverse[] = {
+    {"й", "Й", 1.0, Copy, 0x71, 0, 0x51},
+    {"ц", "Ц", 1.0, Copy, 0x77, 0, 0x57},
+    {"у", "У", 1.0, Copy, 0x65, 0, 0x45},
+    {"к", "К", 1.0, Copy, 0x72, 0, 0x52},
+    {"е", "Е", 1.0, Copy, 0x74, 0, 0x54},
+    {"н", "Н", 1.0, Copy, 0x79, 0, 0x59},
+
+    {"", "", 7, Pad},
+
+    {"Sup", "Sup", 1.0, Mod, Super, .scheme = 1},
+    {"CpL", "CpL", 1.0, Mod, CapsLock, .scheme = 1},
+    {"Tab", "Tab", 1.0, Code, KEY_TAB, .scheme = 1},
+    {"Del", "Del", 1.0, Code, KEY_DELETE, .scheme = 1},
+    {"⌫", "⌫", 1, Code, KEY_BACKSPACE, .scheme = 1},
+    {";", ":", 1.0, Code, KEY_SEMICOLON, .scheme = 4}, //TODO поправить изменение по Shift, не надо мне его тутъ
+    {",", ",", 1.0, Code, KEY_COMMA, .scheme = 4},
+    {"(", "(", 1.0, Code, KEY_9, 0, Shift, .scheme = 4},
+    {")", ")", 1.0, Code, KEY_0, 0, Shift, .scheme = 4},
+    {"_", "_", 1, Code, KEY_MINUS, 0, Shift, .scheme = 4},       
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+
+
+
+
+
+    {"ф", "Ф", 1.0, Copy, 0x61, 0, 0x41},
+    {"ы", "Ы", 1.0, Copy, 0x73, 0, 0x53},
+    {"в", "В", 1.0, Copy, 0x64, 0, 0x44},
+    {"а", "А", 1.0, Copy, 0x66, 0, 0x46},
+    {"п", "П", 1.0, Copy, 0x67, 0, 0x47},
+    {"р", "Р", 1.0, Copy, 0x68, 0, 0x48},
+
+    {"", "", 7.0, Pad},
+
+    {"9", "9", 1.0, Copy, 0x39, .scheme = 2},
+    {"7", "7", 1.0, Copy, 0x37, .scheme = 2},
+    {"5", "5", 1.0, Copy, 0x35, .scheme = 2},
+    {"3", "3", 1.0, Copy, 0x33, .scheme = 2},
+    {"2", "2", 1.0, Copy, 0x32, .scheme = 2},
+    {"↑", "↑", 1.0, Code, KEY_UP, .scheme = 1},
+    {"1", "1", 1.0, Copy, 0x31, .scheme = 2},
+    {"{", "{", 1, Code, KEY_LEFTBRACE, 0, Shift, .scheme = 4},
+    {"}", "}", 1, Code, KEY_RIGHTBRACE, 0, Shift, .scheme = 4},
+    {"=", "=", 1, Code, KEY_EQUAL, .scheme = 4},
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+
+
+
+
+    {"я", "Я", 1.0, Copy, 0x7a, 0, 0x5a},
+    {"ч", "Ч", 1.0, Copy, 0x78, 0, 0x58},
+    {"c", "С", 1.0, Copy, 0x63, 0, 0x43},
+    {"м", "М", 1.0, Copy, 0x76, 0, 0x56},
+    {"и", "И", 1.0, Copy, 0x62, 0, 0x42},
+    {"т", "Т", 1.0, Copy, 0x6e, 0, 0x4e},
+
+    {"", "", 7, Pad},
+
+    {"@", "@", 1.0, Code, KEY_2, 0, Shift, .scheme = 4},
+    {"8", "8", 1.0, Copy, 0x38, .scheme = 2},
+    {"6", "6", 1.0, Copy, 0x36, .scheme = 2},
+    {"4", "4", 1.0, Copy, 0x34, .scheme = 2},
+    {"←", "←", 1.0, Code, KEY_LEFT, .scheme = 1},
+    {"Alt", "Alt", 1.0, Mod, Alt, .scheme = 1},
+    {"→", "→", 1.0, Code, KEY_RIGHT, .scheme = 1},
+    {"i", "I", 1.0, Code, KEY_I, &layouts[ComposeI]},
+    {"a", "A", 1.0, Code, KEY_A, &layouts[ComposeA]},
+    {"-", "-", 1, Code, KEY_MINUS, .scheme = 4},
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+
+
+
+
+
+    {"ё", "Ё", 1.0, Copy, 0x60, 0, 0x7e},
+    {"ъ", "Ъ", 1.0, Copy, 0x5d, 0, 0x7d},
+    {"г", "Г", 1.0, Copy, 0x75, 0, 0x55},
+    {"ш", "Ш", 1.0, Copy, 0x69, 0, 0x49},
+    {"щ", "Щ", 1.0, Copy, 0x6f, 0, 0x4f},
+    {"з", "З", 1.0, Copy, 0x70, 0, 0x50},
+
+    {"", "", 7, Pad},
+
+    {"?", "?", 1, Code, KEY_DOT, 0, Shift, .scheme = 4},
     {"\"", "\"", 1.0, Code, KEY_APOSTROPHE, 0, Shift, .scheme = 4},
+    {"c", "C", 1.0, Code, KEY_C, &layouts[ComposeC]},
+    {"Ctr", "Ctr", 1.0, Mod, Ctrl, .scheme = 1},
+    {"⇧", "⇫", 1, Mod, Shift, .scheme = 1},
+    {"↓", "↓", 1.0, Code, KEY_DOWN, .scheme = 1},
+    {"k", "K", 1.0, Code, KEY_K, &layouts[ComposeK]},
+    {"w", "W", 1.0, Code, KEY_W, &layouts[ComposeW]},
+    {"b", "B", 1.0, Code, KEY_B, &layouts[ComposeB]},
+    {".", ".", 1.0, Code, KEY_DOT, .scheme = 4},
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+
+
+    {"х", "Х", 1.0, Copy, 0x5b, 0, 0x7b},
+    {"о", "О", 1.0, Copy, 0x6a, 0, 0x4a},
+    {"л", "Л", 1.0, Copy, 0x6b, 0, 0x4b},
+    {"д", "Д", 1.0, Copy, 0x6c, 0, 0x4c},
+    {"ж", "Ж", 1.0, Copy, 0x3b, 0, 0x3a},
+    {"ю", "Ю", 1.0, Copy, 0x2e, 0, 0x3e},
+
+    {"", "", 7, Pad},
+
+    {"\\", "\\", 1.0, Code, KEY_BACKSLASH, .scheme = 4},
+    {"'", "'", 1.0, Code, KEY_APOSTROPHE, .scheme = 4},
+    {"e", "E", 1.0, Code, KEY_E, &layouts[ComposeE]},
+    {"z", "Z", 1.0, Code, KEY_Z, &layouts[ComposeZ]},
+    {"y", "Y", 1.0, Code, KEY_Y, &layouts[ComposeY]},
+    {"[", "[", 1, Code, KEY_LEFTBRACE, .scheme = 4},
+    {"Esc", "Esc", 1.0, Code, KEY_ESC, .scheme = 1},
+    {"]", "]", 1, Code, KEY_RIGHTBRACE, .scheme = 4},
+    {"f", "F", 1.0, Code, KEY_F, &layouts[ComposeF]},
+    {"/", "/", 1.0, Code, KEY_SLASH, .scheme = 1, .scheme = 4},
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+
+
+
+    {"э", "Э", 1.0, Copy, 0x27, 0, 0x27},
+    {"б", "Б", 1.0, Copy, 0x2c, 0, 0x2c},
+    {"ь", "Ь", 1.0, Copy, 0x6d, 0, 0x6d},
+    {"|", "|", 1.0, Code, KEY_BACKSLASH, 0, Shift, .scheme = 4},
+    {"!", "!", 1, Code, KEY_1, 0, Shift, .scheme = 4},
+    {"Prt", "Prt", 1, Code, KEY_PRINT, .scheme = 1},
+    
+    {"", "", 7, Pad},
+
+    {"^", "^", 1.0, Code, KEY_6, 0, Shift, .scheme = 4},
+    {"+", "+", 1, Code, KEY_EQUAL, 0, Shift, .scheme = 4},
+    {"t", "T", 1.0, Code, KEY_T, &layouts[ComposeT]},
+    {"x", "X", 1.0, Code, KEY_X, &layouts[ComposeX]},
+    {"h", "H", 1.0, Code, KEY_H, &layouts[ComposeH]},
+    {"v", "V", 1.0, Code, KEY_V, &layouts[ComposeV]},
+    {"", "", 1, Code, KEY_SPACE, .scheme = 3},
+    {":", ":", 1, Code, KEY_SEMICOLON, 0, Shift, .scheme = 4},
+    {"l", "L", 1.0, Code, KEY_L, &layouts[ComposeL]},
+    {"~", "~", 1.0, Code, KEY_GRAVE, 0, Shift, .scheme = 4},
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+
+
+    {"⇊", "⇊", 1.0, Code, KEY_PAGEDOWN, .scheme = 1},
+    {"⇈", "⇈", 1.0, Code, KEY_PAGEUP, .scheme = 1},
+    {"⇥", "⇥", 1.0, Code, KEY_END, .scheme = 1},
+    {"⇤", "⇤", 1.0, Code, KEY_HOME, .scheme = 1},
+    {"`", "`", 1.0, Code, KEY_GRAVE, .scheme = 4},
+
+    {"", "", 8, Pad},
+
+    {"%", "%", 1.0, Code, KEY_5, 0, Shift, .scheme = 4},
+    {"*", "*", 1, Code, KEY_8, 0, Shift, .scheme = 4},
+    {"r", "R", 1.0, Code, KEY_R, &layouts[ComposeR]},
+    {"s", "S", 1.0, Code, KEY_S, &layouts[ComposeS]},
+    {"d", "D", 1.0, Code, KEY_D, &layouts[ComposeD]},
+    {"<", "<", 1, Code, KEY_COMMA, 0, AltGr, .scheme = 4},
+    {"↵", "↵", 1, Code, KEY_ENTER, .scheme = 1},
+    {">", ">", 1, Code, KEY_SLASH, 0, Shift, .scheme = 4},
+    {"g", "G", 1.0, Code, KEY_G, &layouts[ComposeG]},
+    {"0", "0", 1.0, Copy, 0x30, .scheme = 2},
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+
+    {"", "", 13, Pad},
+
+    {"#", "#", 1.0, Code, KEY_3, 0, Shift, .scheme = 4},
+    {"&", "&", 1.0, Code, KEY_7, 0, Shift, .scheme = 4},
+    {"m", "M", 1.0, Code, KEY_M, &layouts[ComposeM]},
+    {"p", "P", 1.0, Code, KEY_P, &layouts[ComposeP]},
+    {"n", "N", 1.0, Code, KEY_N, &layouts[ComposeN]},
+    {"u", "U", 1.0, Code, KEY_U, &layouts[ComposeU]},
+    {"j", "J", 1.0, Code, KEY_J, &layouts[ComposeJ]},
+    {"q", "Q", 1.0, Code, KEY_Q, &layouts[Emoji]},
+    {"o", "O", 1.0, Code, KEY_O, &layouts[ComposeO]},
+    {"$", "$", 1.0, Code, KEY_4, 0, Shift, .scheme = 4},
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+    // {"App", "App", 1.0, Code, KEY_MACRO1, .scheme = 1},
+    {"Mut", "Mut", 1.0, Code, KEY_MUTE, .scheme = 1},
+    {"Vol-", "Vol-", 1.0, Code, KEY_VOLUMEDOWN, .scheme = 1},
+    {"Vol+", "Vol+", 1.0, Code, KEY_VOLUMEUP, .scheme = 1},
+    {"CL", "CL", 1.0, Copy, 0x00F1, .scheme = 1},
+    {"CD", "CD", 1.0, Copy, 0x00F2, .scheme = 1},
+    {"CU", "CU", 1.0, Copy, 0x00F3, .scheme = 1},
+    {"CR", "CR", 1.0, Copy, 0x00F4, .scheme = 1},
+
+    {"", "", 11, Pad},
+
+    {"⌨͕", "⌨͔", 1, NextLayer, .scheme = 1},
+    {"Brt+", "Brt+", 1.0, Code, KEY_BRIGHTNESSUP, .scheme = 1},
+    {"Brt-", "Brt-", 1.0, Code, KEY_BRIGHTNESSDOWN, .scheme = 1},
+    {"MBL", "MBL", 1.0, Copy, 0x00FE, .scheme = 1},
+    {"MBR", "MBR", 1.0, Copy, 0x00FD, .scheme = 1},
+
+    /* end of layout */
+    {"", "", 0.0, Last},
+
+};
+
+
+static struct key keys_tablet[] = {
     {"й", "Й", 1.0, Copy, 0x0439, 0, 0x0419},
     {"ц", "Ц", 1.0, Copy, 0x0446, 0, 0x0426},
     {"у", "У", 1.0, Copy, 0x0443, 0, 0x0423},
     {"к", "К", 1.0, Copy, 0x043A, 0, 0x041A},
     {"е", "Е", 1.0, Copy, 0x0435, 0, 0x0415},
+    {"н", "Н", 1.0, Copy, 0x043D, 0, 0x041D},
 
     {"", "", 7, Pad},
 
-    {"ё", "Ё", 1.0, Copy, 0x0451, 0, 0x0401},
-    {"ъ", "Ъ", 1.0, Copy, 0x044A, 0, 0x042A},
-    {"н", "Н", 1.0, Copy, 0x043D, 0, 0x041D},
-    {"г", "Г", 1.0, Copy, 0x0433, 0, 0x0413},
-    {"ш", "ш", 1.0, Copy, 0x0448, 0, 0x0428},
-    {"щ", "щ", 1.0, Copy, 0x0449, 0, 0x0429},
-    {"з", "з", 1.0, Copy, 0x0437, 0, 0x0417},
-    {"Prt", "Prt", 1, Code, KEY_PRINT, .scheme = 1},
+    {"Sup", "Sup", 1.0, Mod, Super, .scheme = 1},
+    {"CpL", "CpL", 1.0, Mod, CapsLock, .scheme = 1},
+    {"Tab", "Tab", 1.0, Code, KEY_TAB, .scheme = 1},
+    {"Del", "Del", 1.0, Code, KEY_DELETE, .scheme = 1},
+    {"⌫", "⌫", 1, Code, KEY_BACKSPACE, .scheme = 1},
+    {";", ":", 1.0, Code, KEY_SEMICOLON, .scheme = 4}, //TODO поправить изменение по Shift, не надо мне его тутъ
+    {",", ",", 1.0, Code, KEY_COMMA, .scheme = 4},
+    {"(", "(", 1.0, Code, KEY_9, 0, Shift, .scheme = 4},
+    {")", ")", 1.0, Code, KEY_0, 0, Shift, .scheme = 4},
+    {"_", "_", 1, Code, KEY_MINUS, 0, Shift, .scheme = 4},       
 
     {"", "", 0.0, EndRow},
 
-    {"'", "'", 1.0, Code, KEY_APOSTROPHE, .scheme = 4},
+
+
+
+
+
+
+
+
+
+
+
     {"ф", "Ф", 1.0, Copy, 0x0444, 0, 0x0424},
     {"ы", "Ы", 1.0, Copy, 0x044B, 0, 0x042B},
     {"в", "В", 1.0, Copy, 0x0432, 0, 0x0412},
@@ -210,20 +487,31 @@ static struct key keys_tablet[] = {
     {"п", "П", 1.0, Copy, 0x043F, 0, 0x041F},
     {"р", "Р", 1.0, Copy, 0x0440, 0, 0x0420},
 
-    {"", "", 6.0, Pad},
+    {"", "", 7.0, Pad},
 
-    {"х", "Х", 1.0, Copy, 0x0445, 0, 0x0425},
-    {"о", "О", 1.0, Copy, 0x043E, 0, 0x041E},
-    {"л", "Л", 1.0, Copy, 0x043B, 0, 0x041B},
-    {"д", "Д", 1.0, Copy, 0x0434, 0, 0x0414},
-    {"ж", "Ж", 1.0, Copy, 0x0436, 0, 0x0416},
-    {"ю", "Ю", 1.0, Copy, 0x044E, 0, 0x042E},
-    {"э", "Э", 1.0, Copy, 0x044D, 0, 0x042D},
-    {"↵", "↵", 1, Code, KEY_ENTER, .scheme = 1},
+    {"9", "9", 1.0, Copy, 0x39, .scheme = 2},
+    {"7", "7", 1.0, Copy, 0x37, .scheme = 2},
+    {"5", "5", 1.0, Copy, 0x35, .scheme = 2},
+    {"3", "3", 1.0, Copy, 0x33, .scheme = 2},
+    {"2", "2", 1.0, Copy, 0x32, .scheme = 2},
+    {"↑", "↑", 1.0, Code, KEY_UP, .scheme = 1},
+    {"1", "1", 1.0, Copy, 0x31, .scheme = 2},
+    {"{", "{", 1, Code, KEY_LEFTBRACE, 0, Shift, .scheme = 4},
+    {"}", "}", 1, Code, KEY_RIGHTBRACE, 0, Shift, .scheme = 4},
+    {"=", "=", 1, Code, KEY_EQUAL, .scheme = 4},
 
     {"", "", 0.0, EndRow},
 
-    {"Tab", "Tab", 1.0, Code, KEY_TAB, .scheme = 1},
+
+
+
+
+
+
+
+
+
+
     {"я", "Я", 1.0, Copy, 0x044F, 0, 0x042F},
     {"ч", "Ч", 1.0, Copy, 0x0447, 0, 0x0427},
     {"c", "С", 1.0, Copy, 0x0441, 0, 0x0421},
@@ -233,132 +521,186 @@ static struct key keys_tablet[] = {
 
     {"", "", 7, Pad},
 
-    {"8", "*", 1.0, Code, KEY_8, .scheme = 2},
-    {"6", "^", 1.0, Code, KEY_6, .scheme = 2},
-    {"4", "$", 1.0, Code, KEY_4, .scheme = 2},
-    {"2", "@", 1.0, Code, KEY_2, .scheme = 2},
-    {"0", ")", 1.0, Code, KEY_0, .scheme = 2},
-    {"!", "!", 1, Code, KEY_1, 0, Shift, .scheme = 4},
-    {"Alt", "Alt", 1.0, Mod, Alt, .scheme = 1},
-
-    {"", "", 0.0, EndRow},
-
-    {"⇈", "⇈", 1.0, Code, KEY_PAGEUP, .scheme = 1},
-    {"↓", "↓", 1.0, Code, KEY_DOWN, .scheme = 1},
-    {"/", "/", 1.0, Code, KEY_SLASH, .scheme = 1, .scheme = 4},
-    {"-", "-", 1, Code, KEY_MINUS, .scheme = 4},
-    {"|", "|", 1.0, Code, KEY_BACKSLASH, 0, Shift, .scheme = 4},
-    {"б", "Б", 1.0, Copy, 0x0431, 0, 0x0411},
-    {"ь", "Ь", 1.0, Copy, 0x044C, 0, 0x042C},
-    {"~", "~", 1.0, Code, KEY_GRAVE, 0, Shift, .scheme = 4},
-
-    {"", "", 6, Pad},
-
-    {"9", "(", 1.0, Code, KEY_9, .scheme = 2},
-    {"7", "&", 1.0, Code, KEY_7, .scheme = 2},
-    {"5", "%", 1.0, Code, KEY_5, .scheme = 2},
-    {"3", "#", 1.0, Code, KEY_3, .scheme = 2},
-    {"1", "!", 1.0, Code, KEY_1, .scheme = 2},
-    {"↑", "↑", 1.0, Code, KEY_UP, .scheme = 1},
-    {"⇧", "⇫", 1, Mod, Shift, .scheme = 1},
-
-    {"", "", 0.0, EndRow},
-
-    {"⇊", "⇊", 1.0, Code, KEY_PAGEDOWN, .scheme = 1},
-    {"←", "←", 1.0, Code, KEY_LEFT, .scheme = 1},
-    {"_", "_", 1, Code, KEY_MINUS, 0, Shift, .scheme = 4},       
-    {"(", "(", 1.0, Code, KEY_9, 0, Shift, .scheme = 4},
-    {"<", "<", 1, Code, KEY_COMMA, 0, AltGr, .scheme = 4},
-    {"{", "{", 1, Code, KEY_LEFTBRACE, 0, Shift, .scheme = 4},
-    {"[", "[", 1, Code, KEY_LEFTBRACE, .scheme = 4},
-    {"%", "%", 1.0, Code, KEY_5, 0, Shift, .scheme = 4},
-
-    {"", "", 6, Pad},
-
-    {"]", "]", 1, Code, KEY_RIGHTBRACE, .scheme = 4},
-    {"}", "}", 1, Code, KEY_RIGHTBRACE, 0, Shift, .scheme = 4},
-    {">", ">", 1, Code, KEY_SLASH, 0, Shift, .scheme = 4},
-    {")", ")", 1.0, Code, KEY_0, 0, Shift, .scheme = 4},
-    {"", "", 1, Code, KEY_SPACE, .scheme = 3},
-    {"→", "→", 1.0, Code, KEY_RIGHT, .scheme = 1},
-    {"Ctr", "Ctr", 1.0, Mod, Ctrl, .scheme = 1},
-
-    {"", "", 0.0, EndRow},
-
-    {"⇥", "⇥", 1.0, Code, KEY_END, .scheme = 1},
-    {"=", "=", 1, Code, KEY_EQUAL, .scheme = 4},
-    {"q", "Q", 1.0, Code, KEY_Q, &layouts[Emoji]},
-    {"w", "W", 1.0, Code, KEY_W, &layouts[ComposeW]},
-    {"e", "E", 1.0, Code, KEY_E, &layouts[ComposeE]},
-    {"r", "R", 1.0, Code, KEY_R, &layouts[ComposeR]},
-    {"t", "T", 1.0, Code, KEY_T, &layouts[ComposeT]},
-    {"^", "^", 1.0, Code, KEY_6, 0, Shift, .scheme = 4},
-
-    {"", "", 5, Pad},
-
-    {"$", "$", 1.0, Code, KEY_4, 0, Shift, .scheme = 4},
-    {"y", "Y", 1.0, Code, KEY_Y, &layouts[ComposeY]},
-    {"u", "U", 1.0, Code, KEY_U, &layouts[ComposeU]},
-    {"i", "I", 1.0, Code, KEY_I, &layouts[ComposeI]},
-    {"o", "O", 1.0, Code, KEY_O, &layouts[ComposeO]},
-    {"p", "P", 1.0, Code, KEY_P, &layouts[ComposeP]},
-    {",", ",", 1.0, Code, KEY_COMMA, .scheme = 4},
-    {"⌫", "⌫", 1, Code, KEY_BACKSPACE, .scheme = 1},
-
-    {"", "", 0.0, EndRow},
-
-    {"⇤", "⇤", 1.0, Code, KEY_HOME, .scheme = 1},
-    {"+", "+", 1, Code, KEY_EQUAL, 0, Shift, .scheme = 4},
-    {"a", "A", 1.0, Code, KEY_A, &layouts[ComposeA]},
-    {"s", "S", 1.0, Code, KEY_S, &layouts[ComposeS]},
-    {"d", "D", 1.0, Code, KEY_D, &layouts[ComposeD]},
-    {"f", "F", 1.0, Code, KEY_F, &layouts[ComposeF]},
-    {"g", "G", 1.0, Code, KEY_G, &layouts[ComposeG]},
-    {"&", "&", 1.0, Code, KEY_7, 0, Shift, .scheme = 4},
-
-    {"", "", 5, Pad},
-
-    {"`", "`", 1.0, Code, KEY_GRAVE, .scheme = 4},
     {"@", "@", 1.0, Code, KEY_2, 0, Shift, .scheme = 4},
-    {"h", "H", 1.0, Code, KEY_H, &layouts[ComposeH]},
-    {"j", "J", 1.0, Code, KEY_J, &layouts[ComposeJ]},
-    {"k", "K", 1.0, Code, KEY_K, &layouts[ComposeK]},
-    {"l", "L", 1.0, Code, KEY_L, &layouts[ComposeL]},
-    {";", ":", 1.0, Code, KEY_SEMICOLON, .scheme = 4},
-    {"Del", "Del", 1.0, Code, KEY_DELETE, .scheme = 1},
+    {"8", "8", 1.0, Copy, 0x38, .scheme = 2},
+    {"6", "6", 1.0, Copy, 0x36, .scheme = 2},
+    {"4", "4", 1.0, Copy, 0x34, .scheme = 2},
+    {"←", "←", 1.0, Code, KEY_LEFT, .scheme = 1},
+    {"Alt", "Alt", 1.0, Mod, Alt, .scheme = 1},
+    {"→", "→", 1.0, Code, KEY_RIGHT, .scheme = 1},
+    {"i", "I", 1.0, Code, KEY_I, &layouts[ComposeI]},
+    {"a", "A", 1.0, Code, KEY_A, &layouts[ComposeA]},
+    {"-", "-", 1, Code, KEY_MINUS, .scheme = 4},
 
     {"", "", 0.0, EndRow},
 
-    {":", ":", 1, Code, KEY_SEMICOLON, 0, Shift, .scheme = 4},
-    {"*", "*", 1, Code, KEY_8, 0, Shift, .scheme = 4},
-    {"z", "Z", 1.0, Code, KEY_Z, &layouts[ComposeZ]},
-    {"x", "X", 1.0, Code, KEY_X, &layouts[ComposeX]},
-    {"c", "C", 1.0, Code, KEY_C, &layouts[ComposeC]},
-    {"v", "V", 1.0, Code, KEY_V, &layouts[ComposeV]},
-    {"\\", "\\", 1.0, Code, KEY_BACKSLASH, .scheme = 4},
+
+
+
+
+
+
+
+
+
+
+
+    {"ё", "Ё", 1.0, Copy, 0x0451, 0, 0x0401},
+    {"ъ", "Ъ", 1.0, Copy, 0x044A, 0, 0x042A},
+    {"г", "Г", 1.0, Copy, 0x0433, 0, 0x0413},
+    {"ш", "Ш", 1.0, Copy, 0x0448, 0, 0x0428},
+    {"щ", "Щ", 1.0, Copy, 0x0449, 0, 0x0429},
+    {"з", "З", 1.0, Copy, 0x0437, 0, 0x0417},
 
     {"", "", 7, Pad},
 
     {"?", "?", 1, Code, KEY_DOT, 0, Shift, .scheme = 4},
-    {"#", "#", 1.0, Code, KEY_3, 0, Shift, .scheme = 4},
+    {"\"", "\"", 1.0, Code, KEY_APOSTROPHE, 0, Shift, .scheme = 4},
+    {"c", "C", 1.0, Code, KEY_C, &layouts[ComposeC]},
+    {"Ctr", "Ctr", 1.0, Mod, Ctrl, .scheme = 1},
+    {"⇧", "⇫", 1, Mod, Shift, .scheme = 1},
+    {"↓", "↓", 1.0, Code, KEY_DOWN, .scheme = 1},
+    {"k", "K", 1.0, Code, KEY_K, &layouts[ComposeK]},
+    {"w", "W", 1.0, Code, KEY_W, &layouts[ComposeW]},
     {"b", "B", 1.0, Code, KEY_B, &layouts[ComposeB]},
-    {"n", "N", 1.0, Code, KEY_N, &layouts[ComposeN]},
-    {"m", "M", 1.0, Code, KEY_M, &layouts[ComposeM]},
     {".", ".", 1.0, Code, KEY_DOT, .scheme = 4},
-    {"Esc", "Esc", 1.0, Code, KEY_ESC, .scheme = 1},
 
     {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+
+
+    {"х", "Х", 1.0, Copy, 0x0445, 0, 0x0425},
+    {"о", "О", 1.0, Copy, 0x043E, 0, 0x041E},
+    {"л", "Л", 1.0, Copy, 0x043B, 0, 0x041B},
+    {"д", "Д", 1.0, Copy, 0x0434, 0, 0x0414},
+    {"ж", "Ж", 1.0, Copy, 0x0436, 0, 0x0416},
+    {"ю", "Ю", 1.0, Copy, 0x044E, 0, 0x042E},
+
+    {"", "", 7, Pad},
+
+    {"\\", "\\", 1.0, Code, KEY_BACKSLASH, .scheme = 4},
+    {"'", "'", 1.0, Code, KEY_APOSTROPHE, .scheme = 4},
+    {"e", "E", 1.0, Code, KEY_E, &layouts[ComposeE]},
+    {"z", "Z", 1.0, Code, KEY_Z, &layouts[ComposeZ]},
+    {"y", "Y", 1.0, Code, KEY_Y, &layouts[ComposeY]},
+    {"[", "[", 1, Code, KEY_LEFTBRACE, .scheme = 4},
+    {"Esc", "Esc", 1.0, Code, KEY_ESC, .scheme = 1},
+    {"]", "]", 1, Code, KEY_RIGHTBRACE, .scheme = 4},
+    {"f", "F", 1.0, Code, KEY_F, &layouts[ComposeF]},
+    {"/", "/", 1.0, Code, KEY_SLASH, .scheme = 1, .scheme = 4},
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+
+
+
+    {"э", "Э", 1.0, Copy, 0x044D, 0, 0x042D},
+    {"б", "Б", 1.0, Copy, 0x0431, 0, 0x0411},
+    {"ь", "Ь", 1.0, Copy, 0x044C, 0, 0x042C},
+    {"|", "|", 1.0, Code, KEY_BACKSLASH, 0, Shift, .scheme = 4},
+    {"!", "!", 1, Code, KEY_1, 0, Shift, .scheme = 4},
+    {"Prt", "Prt", 1, Code, KEY_PRINT, .scheme = 1},
+    
+    {"", "", 7, Pad},
+
+    {"^", "^", 1.0, Code, KEY_6, 0, Shift, .scheme = 4},
+    {"+", "+", 1, Code, KEY_EQUAL, 0, Shift, .scheme = 4},
+    {"t", "T", 1.0, Code, KEY_T, &layouts[ComposeT]},
+    {"x", "X", 1.0, Code, KEY_X, &layouts[ComposeX]},
+    {"h", "H", 1.0, Code, KEY_H, &layouts[ComposeH]},
+    {"v", "V", 1.0, Code, KEY_V, &layouts[ComposeV]},
+    {"", "", 1, Code, KEY_SPACE, .scheme = 3},
+    {":", ":", 1, Code, KEY_SEMICOLON, 0, Shift, .scheme = 4},
+    {"l", "L", 1.0, Code, KEY_L, &layouts[ComposeL]},
+    {"~", "~", 1.0, Code, KEY_GRAVE, 0, Shift, .scheme = 4},
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+
+
+    {"⇊", "⇊", 1.0, Code, KEY_PAGEDOWN, .scheme = 1},
+    {"⇈", "⇈", 1.0, Code, KEY_PAGEUP, .scheme = 1},
+    {"⇥", "⇥", 1.0, Code, KEY_END, .scheme = 1},
+    {"⇤", "⇤", 1.0, Code, KEY_HOME, .scheme = 1},
+    {"`", "`", 1.0, Code, KEY_GRAVE, .scheme = 4},
+
+    {"", "", 8, Pad},
+
+    {"%", "%", 1.0, Code, KEY_5, 0, Shift, .scheme = 4},
+    {"*", "*", 1, Code, KEY_8, 0, Shift, .scheme = 4},
+    {"r", "R", 1.0, Code, KEY_R, &layouts[ComposeR]},
+    {"s", "S", 1.0, Code, KEY_S, &layouts[ComposeS]},
+    {"d", "D", 1.0, Code, KEY_D, &layouts[ComposeD]},
+    {"<", "<", 1, Code, KEY_COMMA, 0, AltGr, .scheme = 4},
+    {"↵", "↵", 1, Code, KEY_ENTER, .scheme = 1},
+    {">", ">", 1, Code, KEY_SLASH, 0, Shift, .scheme = 4},
+    {"g", "G", 1.0, Code, KEY_G, &layouts[ComposeG]},
+    {"0", "0", 1.0, Copy, 0x30, .scheme = 2},
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
+
+
+    {"", "", 13, Pad},
+
+    {"#", "#", 1.0, Code, KEY_3, 0, Shift, .scheme = 4},
+    {"&", "&", 1.0, Code, KEY_7, 0, Shift, .scheme = 4},
+    {"m", "M", 1.0, Code, KEY_M, &layouts[ComposeM]},
+    {"p", "P", 1.0, Code, KEY_P, &layouts[ComposeP]},
+    {"n", "N", 1.0, Code, KEY_N, &layouts[ComposeN]},
+    {"u", "U", 1.0, Code, KEY_U, &layouts[ComposeU]},
+    {"j", "J", 1.0, Code, KEY_J, &layouts[ComposeJ]},
+    {"q", "Q", 1.0, Code, KEY_Q, &layouts[Emoji]},
+    {"o", "O", 1.0, Code, KEY_O, &layouts[ComposeO]},
+    {"$", "$", 1.0, Code, KEY_4, 0, Shift, .scheme = 4},
+
+    {"", "", 0.0, EndRow},
+
+
+
+
+
+
 
     // {"App", "App", 1.0, Code, KEY_MACRO1, .scheme = 1},
     {"Mut", "Mut", 1.0, Code, KEY_MUTE, .scheme = 1},
     {"Vol-", "Vol-", 1.0, Code, KEY_VOLUMEDOWN, .scheme = 1},
     {"Vol+", "Vol+", 1.0, Code, KEY_VOLUMEUP, .scheme = 1},
+    {"CL", "CL", 1.0, Copy, 0x00F1, .scheme = 1},
+    {"CD", "CD", 1.0, Copy, 0x00F2, .scheme = 1},
+    {"CU", "CU", 1.0, Copy, 0x00F3, .scheme = 1},
+    {"CR", "CR", 1.0, Copy, 0x00F4, .scheme = 1},
 
-    {"", "", 15, Pad},
+    {"", "", 11, Pad},
 
+    {"⌨͕", "⌨͔", 1, NextLayer, .scheme = 1},
     {"Brt+", "Brt+", 1.0, Code, KEY_BRIGHTNESSUP, .scheme = 1},
     {"Brt-", "Brt-", 1.0, Code, KEY_BRIGHTNESSDOWN, .scheme = 1},
-    {"Sup", "Sup", 1.0, Mod, Super, .scheme = 1},
+    {"MBL", "MBL", 1.0, Copy, 0x00FE, .scheme = 1},
+    {"MBR", "MBR", 1.0, Copy, 0x00FD, .scheme = 1},
 
     /* end of layout */
     {"", "", 0.0, Last},
